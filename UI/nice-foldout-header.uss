@@ -2,18 +2,15 @@
     margin-left: 1;
     margin-bottom: 1;
 }
-
 .unity-foldout .unity-toggle__input {
     padding-top: 2;
 }
-
 .unity-foldout .unity-toggle__input:hover {
     background-color: #b6b6b6;
 }
 .unity-foldout .unity-toggle__input:hover {
     background-color: #b6b6b6;
 }
-
 .unity-foldout .unity-toggle__text {
     padding-left: 2;
     bottom: 2;
@@ -21,7 +18,6 @@
     font-size: 13;
     -unity-font-style: bold;
 }
-
 .unity-foldout .unity-toggle__input:focus > .unity-toggle__text {
     color: #003c88;
 }

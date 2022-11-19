@@ -15,30 +15,30 @@ namespace Lulasz.Hierarchy
             { "UnityEngine.Canvas", "UI" },
             { "UnityEngine.UI.Graphic", "UI" },
             { "UnityEngine.UI.Selectable", "UI" },
-            
+
             { "UnityEngine.Rendering.Volume", "Post FX" },
             { "UnityEngine.Terrain", "Environment" },
             { "UnityEngine.Camera", "Camera Work" },
             { "UnityEngine.Light", "Lighting" },
-            
+
             { "UnityEngine.MonoBehaviour", "Gameplay" },
             { "UnityEngine.AI.NavMeshAgent", "AI" },
-            
+
             { "UnityEngine.Rigidbody", "Physics" },
             { "UnityEngine.Rigidbody2D", "Physics" },
-            
+
             { "UnityEngine.Collider", "Surface" },
             { "UnityEngine.Collider2D", "Surface" }
         };
-        
+
         // TODO: Smarter naming
         internal static string DecideFolderName(GameObject folder, GameObject firstSelection)
         {
             if (PrefabUtility.GetPrefabAssetType(firstSelection) == PrefabAssetType.Model)
                 return "Environment";
-            
+
             var components = firstSelection.GetComponents<Component>();
-            
+
             if (components.Length > 1)
             {
                 var mainComponent = SuperHierarchy.DecideMainComponent(components);
@@ -52,7 +52,7 @@ namespace Lulasz.Hierarchy
                         return naming;
                 }
             }
-            
+
             return firstSelection.name
                 .Replace("-", "");
         }
@@ -61,11 +61,11 @@ namespace Lulasz.Hierarchy
         {
             var type = component.GetType();
             var baseType = type.BaseType;
-                
+
             if (typeNamings.TryGetValue(type.FullName, out naming))
-                return true; 
-                
-            if (baseType != null && 
+                return true;
+
+            if (baseType != null &&
                 typeNamings.TryGetValue(baseType.FullName, out naming))
                 return true;
 

@@ -19,7 +19,7 @@ namespace Lulasz.Hierarchy
             public static Type gameObjectInspectorType;
             // Need this to hide GameObject editor in inspector
             public static FieldInfo hideInspector;
-            
+
             public static PropertyInfo getInspectorTracker;
             public static Func<object[]> getAllInspectorWindows;
 
@@ -32,7 +32,7 @@ namespace Lulasz.Hierarchy
                     BindingFlags.NonPublic | BindingFlags.Static);
                 getAllInspectorWindows =
                     Expression.Lambda<Func<object[]>>(Expression.Call(null, getAllInspectorsMethod)).Compile();
-                getInspectorTracker = inspectorWindowType.GetProperty("tracker", 
+                getInspectorTracker = inspectorWindowType.GetProperty("tracker",
                     BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
                 hideInspector =
                     typeof(UnityEditor.Editor).GetField("hideInspector",
@@ -41,7 +41,7 @@ namespace Lulasz.Hierarchy
         }
 
         private static GUIContent folderIsEmpty;
-        
+
         private new Transform target;
         private new Transform[] targets;
         private GameObject[] children;
@@ -53,11 +53,11 @@ namespace Lulasz.Hierarchy
             var instanceIDs = Selection.instanceIDs;
             Selection.instanceIDs = instanceIDs;
         }
-        
+
         private void OnEnable()
         {
             folderIsEmpty = new GUIContent(" Folder is empty.", IconContent("console.infoicon.sml").image);
-            
+
             target = (base.target as Folder).transform;
             targets = new Transform[base.targets.Length];
             for (int i = 0; i < targets.Length; i++)
@@ -71,7 +71,7 @@ namespace Lulasz.Hierarchy
 
             foreach (var target in targets)
             {
-                if((target.hideFlags & HideFlags.HideInInspector) == 0)
+                if ((target.hideFlags & HideFlags.HideInInspector) == 0)
                     target.hideFlags |= HideFlags.HideInInspector;
             }
 
@@ -89,7 +89,7 @@ namespace Lulasz.Hierarchy
                     target.hideFlags ^= HideFlags.HideInInspector;
             }
         }
-        
+
         private void SetGameObjectInspectorHidden(bool hide)
         {
             foreach (var inspector in Reflected.getAllInspectorWindows())
@@ -99,13 +99,13 @@ namespace Lulasz.Hierarchy
                 for (var i = 1; i < tracker.activeEditors.Length; i++)
                 {
                     var editor = tracker.activeEditors[i];
-                    
+
                     if (editor == null)
                         continue;
-                    
+
                     if (!(editor.target is Folder folder))
                         continue;
-                    
+
                     foreach (var gameObjectInspector in Resources.FindObjectsOfTypeAll(Reflected.gameObjectInspectorType))
                     {
                         var goEditor = gameObjectInspector as UnityEditor.Editor;
@@ -124,16 +124,16 @@ namespace Lulasz.Hierarchy
         public override void OnInspectorGUI()
         {
             GUILayout.Space(5);
-            
+
             foreach (var child in children)
             {
                 EditorGUILayout.BeginHorizontal();
-                
+
                 EditorGUI.BeginChangeCheck();
                 GUILayout.Toggle(child.activeSelf, GUIContent.none);
                 if (EditorGUI.EndChangeCheck())
                     child.SetActive(!child.activeSelf);
-                
+
                 EditorGUILayout.ObjectField(child, typeof(GameObject), true);
                 EditorGUILayout.EndHorizontal();
             }
