@@ -1,0 +1,19 @@
+{
+  "name": "com.lulasz.super-hierarchy",
+  "version": "1.0.0",
+  "displayName": "Super Hierarchy",
+  "description": "A great addon for hierarchy,",
+  "keywords": [
+    "editor",
+    "hierarchy",
+    "tools",
+    "utility",
+    "extensions"
+  ],
+  "author": {
+    "name": "Łukasz Majewski",
+    "email": "lukasz_majewski@outlook.com",
+    "url": "https://github.com/lulasz/super-hierarchy"
+  },
+  "unity": "2021.3"
+}
