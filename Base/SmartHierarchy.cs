@@ -155,8 +155,8 @@ namespace Lulasz.Hierarchy
                     //        item.view.icon = item.icon;
                     //        break;
                     //    case StickyIcon.NotOnPrefabs:
-                    //        if (!item.isRootPrefab)
-                    //            item.view.icon = item.icon;
+                            if (!item.isRootPrefab)
+                                item.view.icon = item.icon;
                     //        break;
                     //}
                 }
