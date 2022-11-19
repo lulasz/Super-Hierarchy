@@ -146,20 +146,9 @@ namespace Lulasz.Hierarchy
             }
             else
             {
-                if (item.icon != null)
-                {
-                    //switch (preferences.stickyComponentIcon)
-                    //{
-                    //    case StickyIcon.Never: break;
-                    //    case StickyIcon.OnAnyObject:
-                    //        item.view.icon = item.icon;
-                    //        break;
-                    //    case StickyIcon.NotOnPrefabs:
-                            if (!item.isRootPrefab)
-                                item.view.icon = item.icon;
-                    //        break;
-                    //}
-                }
+                // Set icon in hierarchy
+                if (item.icon != null && !item.isRootPrefab)
+                    item.view.icon = item.icon;
 
                 if (Application.isPlaying)
                     item.view.depth = item.initialDepth;
