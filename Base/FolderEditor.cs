@@ -112,10 +112,11 @@ namespace Lulasz.Hierarchy
                         var gameObject = goEditor.target as GameObject;
 
                         // Hide GameObject inspector only for folders
-                        if (folder.gameObject == gameObject)
-                        {
-                            Reflected.hideInspector.SetValue(gameObjectInspector, hide);
-                        }
+                        if (folder.gameObject != null)
+                            if (folder.gameObject == gameObject)
+                            {
+                                Reflected.hideInspector.SetValue(gameObjectInspector, hide);
+                            }
                     }
                 }
             }
